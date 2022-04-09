@@ -3,9 +3,9 @@ function loadCourses() {
 
     return fetch('http://localhost/timetable/api/get-courses.php')
         .then(res => res.json())
-        .then(notes => {
-            notes.forEach(note => {
-                renderCourse(note);
+        .then(courses => {
+            courses.forEach(course => {
+                renderCourse(course);
             });
         })
         .catch(err => {
