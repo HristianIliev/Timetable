@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="./style.css" rel="stylesheet" type="text/css" />
+
+    <title>Курсов проект</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="./add.html">Добавяне на курсове</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./edit.html">Редактиране на курсове</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./display.html">Визуализация на програма</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./dependency.html">Визуализация на зависимости</a>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="flex-box centered whole-page">
+        <p class="fs-4">Добави курс</p>
+        <div class="add-form-width">
+            <form method="post" action="/courses">
+                <div>
+                    <label for="titleInput">Име</label>
+                    <input type="text" id="titleInput">
+                </div>
+                <div>
+                    <label for="descriptionInput">Описание</label>
+                    <textarea id="descriptionInput" rows="3"></textarea>
+                </div>
+                <div class="form-item">
+                    <label for="day">Ден на провеждане</label>
+                    <select id="day" name="dayId">
+                        <option value="1">Понеделник</option>
+                        <option value="2">Вторник</option>
+                        <option value="3">Сряда</option>
+                        <option value="4">Четвъртък</option>
+                        <option value="5">Петък</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="startTimeInput">Час на стартиране</label>
+                    <input type="text" id="startTimeInput" aria-describedby="startTimeHelp">
+                    <div id="startTimeHelp">Напишете час на стартиране във формат HH:mm. Пример: 14:00</div>
+                </div>
+                <div>
+                    <label for="endTimeInput">Час на приключване</label>
+                    <input type="text" id="endTimeInput" aria-describedby="endTimeHelp">
+                    <div id="endTimeHelp">Напишете час на приключване във формат HH:mm. Пример: 14:00</div>
+                </div>
+                <div>
+                    <label for="dependenciesInput">Предпоставки</label>
+                    <input type="text" id="dependenciesInput" aria-describedby="dependenciesHelp">
+                    <div id="dependenciesHelp">Напиши курсовете, които са предпоставки за този курс във формат: Име на Курс 1;Име на Курс 2;Име на Курс3;... </div>
+                </div>
+
+                <button id="submitBtn" type="submit">Добави</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>

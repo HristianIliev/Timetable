@@ -1,0 +1,179 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+}
+
+.navbar .navbar-nav {
+    list-style: none;
+}
+
+.navbar .navbar-nav .nav-item .nav-link {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 14px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navbar .navbar-nav .nav-item .nav-link:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.navbar .navbar-nav .nav-item .active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+.grid {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.grid .gridListItem {
+    border: 2px solid #04AA6D;
+    min-width: 24%;
+    margin: 2% .35%;
+    display: inline-flex;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+}
+
+.grid .gridListItem:hover {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .15);
+}
+
+.grid .gridBox {
+    width: 100%;
+    height: 100vh;
+    padding: 1% 2%;
+    background: #fff;
+    min-height: 200px;
+    max-height: 220px;
+    box-sizing: border-box;
+}
+
+.disc-style-type {
+    list-style-type: disc;
+}
+
+.delete-btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    margin-top: 15px;
+    background-color: #f97d74;
+}
+
+.delete-btn:hover {
+    opacity: 1;
+}
+
+.course-title {
+    text-align: center;
+}
+
+.flex-box {
+    display: flex;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%
+}
+
+.centered {
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.form-style {
+    margin: 10px auto;
+    width: 100%;
+    padding: 20px 12px 10px 20px;
+}
+
+.form-style .input {
+    padding: 0;
+    list-style: none;
+    margin: 10px 0 0 0;
+}
+
+.form-style label {
+    margin: 0 10px 0 0;
+    padding: 0px;
+    display: block;
+    font-weight: bold;
+}
+
+.form-style input[type=text],
+textarea,
+select {
+    box-sizing: border-box;
+    border: 1px solid #BEBEBE;
+    padding: 7px;
+    margin: 0px;
+    outline: none;
+}
+
+.form-style input[type=text]:focus,
+.form-style textarea:focus,
+.form-style select:focus {
+    box-shadow: 0 0 8px #04AA6D;
+    border: 1px solid #04AA6D;
+}
+
+.form-style .field-divided {
+    width: 49%;
+}
+
+.form-style-1 .field-long {
+    width: 100%;
+}
+
+.form-style-1 .field-select {
+    width: 100%;
+}
+
+.form-style-1 .field-textarea {
+    height: 100px;
+}
+
+.form-style button[type=submit] {
+    margin-top: 10px;
+    background: #04AA6D;
+    padding: 8px 15px 8px 15px;
+    border: none;
+    color: #fff;
+}
+
+.form-style button[type=submit]:hover {
+    background: rgb(64, 154, 177);
+    box-shadow: none;
+}
+
+.form-style .required {
+    color: red;
+}
+
+.direction-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.help {
+    font-size: 14px;
+    color: #6c757d!important;
+}
