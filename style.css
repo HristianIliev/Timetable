@@ -220,3 +220,7 @@ select {
     gap: 30px;
     justify-content: center;
 }
+
+.display-none {
+    display: none;
+}

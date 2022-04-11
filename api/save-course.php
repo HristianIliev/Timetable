@@ -26,21 +26,23 @@ if ($post) {
         $db = new DB();
         $connection = $db->getConnection();
 
+        unset($course["id"]);
+
         $sql = "INSERT INTO courses (title, description, day, start_time, end_time, dependencies) 
                 VALUES (:title, :description, :day, :startTime, :endTime, :dependencies)";
 
+        unset($course->id);
+        
         $stmt = $connection->prepare($sql);
         $stmt->execute($course);
 
         $courseId = $connection->lastInsertId();
 
         echo json_encode(["status" => "SUCCES", "message" => "Курсът е записан", "id" => $courseId]);
-
     } catch (PDOException $e) {
         http_response_code(500);
         echo json_encode(["status" => "ERROR", "message" => "Грешка при запис на курс"]);
     }
-
 } else {
     http_response_code(400);
     exit(json_encode(["status" => "ERROR", "message" => "Грешка!"]));

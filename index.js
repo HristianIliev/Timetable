@@ -7,6 +7,8 @@ function loadCourses() {
             courses.forEach(course => {
                 renderCourse(course);
             });
+
+            addExportButtonListener(courses);
         })
         .catch(err => {
             console.error(err);
@@ -22,6 +24,7 @@ function saveCourse(course) {
             body: JSON.stringify(course)
         })
         .then(res => {
+            loadCourses();
             return res.json();
         })
         .catch(err => {
@@ -63,6 +66,38 @@ function addDeleteBtnListener(courseId) {
     });
 }
 
+function addExportButtonListener(courses) {
+    var exportBtn = document.getElementById("export-timetable");
+    exportBtn.addEventListener('click', () => {
+        var file = new Blob([JSON.stringify(courses)], { type: "txt" });
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = "timetable";
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    });
+}
+
+function addImportButtonListener() {
+    document.getElementById('file-input').addEventListener('change', (event) => {
+        var file = event.target.files.item(0)
+        var text = file.text();
+
+        text.then(function(result) {
+            var courses = JSON.parse(result);
+
+            for (var i = 0; i < courses.length; i++) {
+                saveCourse(courses[i]);
+            }
+        });
+    });
+}
+
 function renderCourse(course) {
     const courseId = course.id;
     const section = document.createElement('section');
@@ -94,6 +129,8 @@ function renderCourse(course) {
 (function() {
 
     loadCourses();
+
+    addImportButtonListener();
 
     const courseForm = document.getElementById('course-form');
 
