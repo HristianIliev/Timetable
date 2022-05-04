@@ -102,7 +102,7 @@
     font-size: 12px;
 }
 
-.timetable .week-names>div {
+.timetable .week-names>section {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -118,7 +118,7 @@
     font-size: 14px;
 }
 
-.timetable .time-interval>div {
+.timetable .time-interval>section {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -134,7 +134,7 @@
     grid-template-columns: repeat(5, 1fr);
 }
 
-.timetable .content>div {
+.timetable .content>section {
     box-shadow: inset 1px 0 0 #eceff1, inset 0 1px 0 0 #eceff1;
 }
 
