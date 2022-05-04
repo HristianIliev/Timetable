@@ -24,7 +24,6 @@ function saveCourse(course) {
             body: JSON.stringify(course)
         })
         .then(res => {
-            loadCourses();
             return res.json();
         })
         .catch(err => {
