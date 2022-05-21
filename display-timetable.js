@@ -1,4 +1,5 @@
 var colors = ["accent-pink-gradient", "accent-orange-gradient", "accent-green-gradient", "accent-cyan-gradient", "accent-blue-gradient", "accent-purple-gradient"]
+var nextCourseColor = 0
 
 function loadCourses() {
     return fetch('http://localhost/timetable/api/get-courses.php')
@@ -13,8 +14,16 @@ function loadCourses() {
         });
 }
 
+let coursesColors = new Map();
+
 function fillTimetable(course) {
-    var color = getRandomColor();
+    var color;
+    if (coursesColors.has(course.title)) {
+        color = coursesColors.get(course.title);
+    } else {
+        color = getColor();
+        coursesColors.set(course.title, color);
+    }
 
     var arrayOfStartTimes = getStartTimes(course.startTime.split(":")[0], course.endTime.split(":")[0]);
     for (var i = 0; i < arrayOfStartTimes.length; i++) {
@@ -36,8 +45,10 @@ function getStartTimes(startTime, endTime) {
     return result;
 }
 
-function getRandomColor() {
-    return colors[(Math.floor(Math.random() * 6) + 1) - 1];
+function getColor() {
+    var color = colors[nextCourseColor];
+    nextCourseColor = (nextCourseColor + 1) % 6;
+    return color;
 }
 
 function convertDayOfTheWeek(day) {
