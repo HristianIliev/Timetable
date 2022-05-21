@@ -38,7 +38,7 @@
             <section class="input">
                 <section class="direction-row">
                     <label for="titleInput">Име</label>
-                    <input type="text" id="titleInput" required>
+                    <input type="text" id="titleInput" pattern="^[А-Яа-я]+$" required>
                 </section>
             </section>
             <section class="input">
@@ -62,21 +62,21 @@
             <section class="input">
                 <section class="direction-row">
                     <label for="startTimeInput">Час на стартиране</label>
-                    <input type="text" id="startTimeInput" aria-describedby="startTimeHelp" required>
+                    <input type="text" id="startTimeInput" aria-describedby="startTimeHelp" pattern="^\w\w:00$" required>
                 </section>
                 <section id="startTimeHelp" class="help">Напишете час на стартиране във формат HH:mm. Часът може да бъде само кръгъл час. Пример: 8:00.</section>
             </section>
             <section class="input">
                 <section class="direction-row">
                     <label for="endTimeInput">Час на приключване</label>
-                    <input type="text" id="endTimeInput" aria-describedby="endTimeHelp" required>
+                    <input type="text" id="endTimeInput" aria-describedby="endTimeHelp" pattern="^\w\w:00$" required>
                 </section>
-                <section id="endTimeHelp" class="help">Напишете час на приключване във формат HH:mm. Часът може да бъде само кръгъл час. Пример: 15:00</section>
+                <section id="endTimeHelp" class="help">Напишете час на приключване във формат HH:mm. Часът може да бъде само кръгъл час. Пример: 15:00.</section>
             </section>
             <section class="input">
                 <section class="direction-row">
                     <label for="dependenciesInput">Предпоставки</label>
-                    <input type="text" id="dependenciesInput" aria-describedby="dependenciesHelp" required>
+                    <input type="text" id="dependenciesInput" aria-describedby="dependenciesHelp" pattern="^[А-Яа-я]+$" required>
                 </section>
                 <section id="dependenciesHelp" class="help">Напиши курсовете, които са предпоставки за този курс във формат: Име на Курс 1;Име на Курс 2;Име на Курс3;... </section>
             </section>
