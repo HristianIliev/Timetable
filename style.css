@@ -236,3 +236,7 @@ select {
     margin: 10px;
     white-space: nowrap;
 }
+
+p#dependencyExplanation {
+    padding: 10px;
+}
