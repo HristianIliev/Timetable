@@ -90,13 +90,14 @@ body {
     height: 100vh;
     padding: 1% 2%;
     background: #fff;
-    min-height: 200px;
-    max-height: 220px;
+    height: 250px;
     box-sizing: border-box;
 }
 
 .disc-style-type {
     list-style-type: disc;
+    overflow: auto;
+    white-space: nowrap;
 }
 
 .delete-btn {
@@ -216,11 +217,22 @@ select {
 }
 
 #courses-body {
-    display: flex;
-    gap: 30px;
     justify-content: center;
+    display: block;
+    overflow-y: hidden;
+    overflow-x: auto;
+    width: 95%;
+    height: 300px;
+    margin-left: 2.5%;
+    white-space: nowrap;
 }
 
 .display-none {
     display: none;
+}
+
+.course {
+    display: inline-block;
+    margin: 10px;
+    white-space: nowrap;
 }
