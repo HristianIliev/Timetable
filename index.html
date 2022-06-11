@@ -32,55 +32,94 @@
         <button id="export-timetable" class="button export-button">Експорт към JSON</button>
         <input id="file-input" type="file" name="name" class="button import-button" placeholder="Импорт от JSON"></input>
     </section>
+    
+    <section class="row" id="create-course-title" type="button">
+        Покажи форма за създаване на курс
+    </section>
 
     <section class="flex-box centered">
         <form id="course-form" class="form-style">
-            <section class="input">
-                <section class="direction-row">
-                    <label for="titleInput">Име</label>
-                    <input type="text" id="titleInput" pattern="^[А-Яа-я]+$" required>
-                </section>
-            </section>
-            <section class="input">
-                <section class="direction-row">
-                    <label for="descriptionInput">Описание</label>
-                    <textarea id="descriptionInput" rows="3" class="field-textarea" required></textarea>
-                </section>
-            </section class="input">
-            <section class="form-item input">
-                <section class="direction-row">
-                    <label for="day">Ден на провеждане</label>
-                    <select id="day" name="dayId" class="field-select">
-                        <option value="Понеделник">Понеделник</option>
-                        <option value="Вторник">Вторник</option>
-                        <option value="Сряда">Сряда</option>
-                        <option value="Четвъртък">Четвъртък</option>
-                        <option value="Петък">Петък</option>
-                    </select>
-                </section>
-            </section>
-            <section class="input">
-                <section class="direction-row">
-                    <label for="startTimeInput">Час на стартиране</label>
-                    <input type="text" id="startTimeInput" aria-describedby="startTimeHelp" pattern="^\w\w:00$" required>
-                </section>
-                <section id="startTimeHelp" class="help">Напишете час на стартиране във формат HH:mm. Часът може да бъде само кръгъл час. Пример: 8:00.</section>
-            </section>
-            <section class="input">
-                <section class="direction-row">
-                    <label for="endTimeInput">Час на приключване</label>
-                    <input type="text" id="endTimeInput" aria-describedby="endTimeHelp" pattern="^\w\w:00$" required>
-                </section>
-                <section id="endTimeHelp" class="help">Напишете час на приключване във формат HH:mm. Часът може да бъде само кръгъл час. Пример: 15:00.</section>
-            </section>
-            <section class="input">
-                <section class="direction-row">
-                    <label for="dependenciesInput">Предпоставки</label>
-                    <input type="text" id="dependenciesInput" aria-describedby="dependenciesHelp" pattern="^[А-Яа-я]+$" required>
-                </section>
-                <section id="dependenciesHelp" class="help">Напиши курсовете, които са предпоставки за този курс във формат: Име на Курс 1;Име на Курс 2;Име на Курс3;... </section>
-            </section>
-            <button id="submitBtn" type="submit">Добави</button>
+            <table>
+                <tr>
+                    <td class="label">
+                        <label for="titleInput">Име</label>
+                    </td>
+                    <td class="inputBox">
+                        <input type="text" id="titleInput" pattern="^[А-Яа-я]+$" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">
+                        <label for="descriptionInput">Описание</label>
+                    </td>
+                    <td class="inputBox">
+                        <textarea id="descriptionInput" rows="3" class="field-textarea" required></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">
+                        <label for="day">Ден на провеждане</label>
+                    </td>
+                    <td class="inputBox">
+                        <select id="day" name="dayId" class="field-select">
+                            <option value="Понеделник">Понеделник</option>
+                            <option value="Вторник">Вторник</option>
+                            <option value="Сряда">Сряда</option>
+                            <option value="Четвъртък">Четвъртък</option>
+                            <option value="Петък">Петък</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">
+                        <label for="startTimeInput">Час на стартиране</label>
+                    </td>
+                    <td class="inputBox">
+                        <input type="text" id="startTimeInput" aria-describedby="startTimeHelp" pattern="^\w\w:00$" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <section id="startTimeHelp" class="help">Напишете час на стартиране във формат HH:mm. Часът може да бъде само кръгъл час. Пример: 8:00.</section>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">
+                        <label for="endTimeInput">Час на приключване</label>
+                    </td>
+                    <td class="inputBox">
+                        <input type="text" id="endTimeInput" aria-describedby="endTimeHelp" pattern="^\w\w:00$" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <section id="endTimeHelp" class="help">Напишете час на приключване във формат HH:mm. Часът може да бъде само кръгъл час. Пример: 15:00.</section>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">
+                        <label for="dependenciesInput">Предпоставки</label>
+                    </td>
+                    <td class="inputBox">
+                        <input type="text" id="dependenciesInput" aria-describedby="dependenciesHelp" pattern="^[А-Яа-я]+$" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <section id="dependenciesHelp" class="help">Напиши курсовете, които са предпоставки за този курс във формат: Име на Курс 1;Име на Курс 2;Име на Курс3;... </section>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">
+                    </td>
+                    <td class="inputBox">
+                        <button id="submitBtn" type="submit">Добави</button>
+                    </td>
+                </tr>
+            </table>
         </form>
     </section>
 
