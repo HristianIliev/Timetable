@@ -5,11 +5,13 @@
         private $connection;
 
         function __construct() {
-            
-            $host = "localhost";
-            $dbname = "courses";
-            $username = "root";
-            $password = "";
+            $json = file_get_contents('./../db_connection_data.json');
+            $json_data = json_decode($json,true);
+
+            $host = $json_data["host"];
+            $dbname = $json_data["dbname"];
+            $username = $json_data["username"];
+            $password = $json_data["password"];
 
             $dsn = "mysql:host=$host;dbname=$dbname";
 

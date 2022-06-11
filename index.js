@@ -97,6 +97,22 @@ function addImportButtonListener() {
     });
 }
 
+function addCreateCourseButtonListener() {
+    let formElement = document.getElementById('course-form').style.visibility = 'hidden';
+    document.getElementById('create-course-title').addEventListener('click', (event) => {
+        let formElement = document.getElementById('course-form');
+        let buttonElement = document.getElementById('create-course-title');
+        
+        if (formElement.style.visibility == 'hidden') {
+            buttonElement.innerHTML = 'Скрий форма за създаване на курс';
+            formElement.style.visibility = 'visible';
+        } else {
+            formElement.style.visibility = 'hidden';
+            buttonElement.innerHTML = 'Покажи форма за създаване на курс';
+        }
+    });
+}
+
 function renderCourse(course) {
     const courseId = course.id;
     const section = document.createElement('section');
@@ -130,6 +146,8 @@ function renderCourse(course) {
     loadCourses();
 
     addImportButtonListener();
+
+    addCreateCourseButtonListener();
 
     const courseForm = document.getElementById('course-form');
 
