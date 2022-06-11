@@ -45,7 +45,7 @@
                         <label for="titleInput">Име</label>
                     </td>
                     <td class="inputBox">
-                        <input type="text" id="titleInput" pattern="^[А-Яа-я]+$" required>
+                        <input type="text" id="titleInput" pattern="^[А-Яа-я 0-9]+$" required>
                     </td>
                 </tr>
                 <tr>
@@ -81,7 +81,7 @@
                 <tr>
                     <td></td>
                     <td>
-                        <section id="startTimeHelp" class="help">Напишете час на стартиране във формат HH:mm. Часът може да бъде само кръгъл час. Пример: 8:00.</section>
+                        <section id="startTimeHelp" class="help">Напишете час на стартиране във формат HH:mm. Часът може да бъде само кръгъл час. Пример: 08:00.</section>
                     </td>
                 </tr>
                 <tr>
@@ -103,7 +103,7 @@
                         <label for="dependenciesInput">Предпоставки</label>
                     </td>
                     <td class="inputBox">
-                        <input type="text" id="dependenciesInput" aria-describedby="dependenciesHelp" pattern="^[А-Яа-я]+$" required>
+                        <input type="text" id="dependenciesInput" aria-describedby="dependenciesHelp" pattern="^[А-Яа-я]+$">
                     </td>
                 </tr>
                 <tr>
