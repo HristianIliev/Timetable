@@ -32,7 +32,7 @@ var coursesArrayBuffer;
 /// Gathers the courses names and dependacies from the data base and initializes their visualisation 
 function start() {
     coursesArray = new Array();
-    fetch('http://localhost/timetable/api/get-courses.php')
+    fetch('./api/get-courses.php')
         .then(res => res.json())
         .then(courses => {
             // Courses names

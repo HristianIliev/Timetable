@@ -2,7 +2,7 @@ var colors = ["accent-pink-gradient", "accent-orange-gradient", "accent-green-gr
 var nextCourseColor = 0
 
 function loadCourses() {
-    return fetch('http://localhost/timetable/api/get-courses.php')
+    return fetch('./api/get-courses.php')
         .then(res => res.json())
         .then(courses => {
             courses.forEach(course => {
