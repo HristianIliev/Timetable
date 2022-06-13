@@ -1,7 +1,7 @@
 function loadCourses() {
     document.getElementById('courses-body').innerHTML = null;
 
-    return fetch('http://localhost/timetable/api/get-courses.php')
+    return fetch('./api/get-courses.php')
         .then(res => res.json())
         .then(courses => {
             courses.forEach(course => {
@@ -16,7 +16,7 @@ function loadCourses() {
 }
 
 function saveCourse(course) {
-    return fetch('http://localhost/timetable/api/save-course.php', {
+    return fetch('./api/save-course.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -32,7 +32,7 @@ function saveCourse(course) {
 }
 
 function deleteCourse(id) {
-    fetch(`http://localhost/timetable/api/delete-course.php?id=${id}`)
+    fetch(`./api/delete-course.php?id=${id}`)
         .then(res => res.json())
         .then(data => {
             console.log(data);
