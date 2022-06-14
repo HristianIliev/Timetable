@@ -28,8 +28,8 @@ if ($post) {
 
         unset($course["id"]);
 
-        $sql = "INSERT INTO courses (title, description, day, start_time, end_time, dependencies) 
-                VALUES (:title, :description, :day, :startTime, :endTime, :dependencies)";
+        $sql = "INSERT INTO courses (title, description, day, start_time, end_time, dependencies, specialty) 
+                VALUES (:title, :description, :day, :startTime, :endTime, :dependencies, :specialty)";
 
         unset($course->id);
         

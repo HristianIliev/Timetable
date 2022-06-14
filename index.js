@@ -1,7 +1,12 @@
 function loadCourses() {
     document.getElementById('courses-body').innerHTML = null;
 
-    return fetch('./api/get-courses.php')
+    var cookie = getCookie("currentlyLoggedInUserSpecialty");
+    if (!cookie || cookie === '') {
+        cookie = "SI";
+    }
+
+    return fetch('./api/get-courses.php?specialty=' + cookie)
         .then(res => res.json())
         .then(courses => {
             courses.forEach(course => {
@@ -13,6 +18,12 @@ function loadCourses() {
         .catch(err => {
             console.error(err);
         });
+}
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
 function saveCourse(course) {
@@ -50,7 +61,8 @@ function getFormValue(courseForm) {
         day: formElements[2].value,
         startTime: formElements[3].value,
         endTime: formElements[4].value,
-        dependencies: formElements[5].value
+        dependencies: formElements[5].value,
+        specialty: formElements[6].value
     }
 }
 
@@ -102,7 +114,7 @@ function addCreateCourseButtonListener() {
     document.getElementById('create-course-title').addEventListener('click', (event) => {
         let formElement = document.getElementById('course-form');
         let buttonElement = document.getElementById('create-course-title');
-        
+
         if (formElement.style.visibility == 'hidden') {
             buttonElement.innerHTML = 'Скрий форма за създаване на курс';
             formElement.style.visibility = 'visible';

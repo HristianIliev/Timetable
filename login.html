@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="./style.css" rel="stylesheet" type="text/css" />
+    <link href="./login.css" rel="stylesheet" type="text/css">
+
+    <title>Курсов проект</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="./login.html">Вход в системата</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./index.html">Курсове</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./display.html">Визуализация на програма</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./dependency.html">Визуализация на зависимости</a>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="modal">
+        <form class="modal-content animate" id="loginform">
+            <section class="container">
+                <label for="email"><b>Емайл</b></label>
+                <input id="email" type="email" placeholder="Въведи емайл" name="email" required>
+
+                <label for="psw"><b>Парола</b></label>
+                <input id="password" type="password" placeholder="Въведи парола" name="psw" required>
+
+                <button type="button" id="login_btn">Login</button>
+                <label>
+            </label>
+            </section>
+        </form>
+    </section>
+
+    <script src="./login.js"></script>
+</body>
+
+</html>
