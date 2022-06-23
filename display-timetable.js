@@ -2,7 +2,31 @@ var colors = ["accent-pink-gradient", "accent-orange-gradient", "accent-green-gr
 var nextCourseColor = 0
 
 function loadCourses() {
-    return fetch('./api/get-courses.php')
+    let additionalInfo = "";
+
+    let tabTitleElement = document.getElementsByClassName("nav-item")[2].getElementsByTagName("a")[0];
+    tabTitleElement.textContent = "Визуализация на програма";
+
+    var url = new URL(window.location.href);
+    console.log(window.location.href);
+    var location = url.searchParams.get("location");
+    if(location) {
+        additionalInfo = '?location=' + location;
+        console.log("Search by location:" + location);
+        tabTitleElement.textContent += " на " + location;
+    }else{
+        var cookie = getCookie("currentlyLoggedInUserSpeciality");
+        if (!cookie || cookie === '') {
+            cookie = "SI";
+        }
+        additionalInfo = '?speciality=' + cookie;
+        console.log("Search by speciality:" + cookie);
+        tabTitleElement.textContent += " на " + cookie;
+    }
+
+    
+
+    return fetch('./api/get-courses.php' + additionalInfo)
         .then(res => res.json())
         .then(courses => {
             courses.forEach(course => {
@@ -12,6 +36,12 @@ function loadCourses() {
         .catch(err => {
             console.error(err);
         });
+}
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
 let coursesColors = new Map();
@@ -31,9 +61,20 @@ function fillTimetable(course) {
         var newSpot = document.createElement("div");
         newSpot.classList.add(color);
         newSpot.classList.add("center-text");
-        newSpot.textContent += course.title;
+        newSpot.textContent = course.title;
         block.appendChild(newSpot)
     }
+}
+
+function isValidHttpUrl(string) {
+
+    try {
+        let url = new URL(string);
+    } catch (_) {
+    return false;  
+    }
+
+    return true;
 }
 
 function getStartTimes(startTime, endTime) {
@@ -65,6 +106,7 @@ function convertDayOfTheWeek(day) {
             return "friday";
     }
 }
+
 
 (function() {
 

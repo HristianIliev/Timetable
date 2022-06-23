@@ -1,4 +1,10 @@
-window.addEventListener('load', start());
+window.addEventListener('load', () => {
+    
+    changeColorMode();
+    createColors();
+    document.getElementById("color-change-btn").addEventListener('click', changeColorMode);
+    start();
+});
 
 // load ->
 //       start ->
@@ -31,8 +37,16 @@ var coursesArrayBuffer;
 
 /// Gathers the courses names and dependacies from the data base and initializes their visualisation 
 function start() {
+
     coursesArray = new Array();
-    fetch('./api/get-courses.php')
+    var cookie = getCookie("currentlyLoggedInUserSpeciality");
+    if (!cookie || cookie === '') {
+        cookie = "SI";
+    }
+    let tabTitleElement = document.getElementsByClassName("nav-item")[3].getElementsByTagName("a")[0];
+    tabTitleElement.textContent = "Визуализация на зависимости на " + cookie;
+
+    fetch('./api/get-courses.php?speciality=' + cookie)
         .then(res => res.json())
         .then(courses => {
             // Courses names
@@ -58,13 +72,25 @@ function start() {
         });
 }
 
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 /// /Add links to coursesArray.links based on the dependancies string
 function createLinkFromString(dependenciesString, parentId) {
     let dependencies = dependenciesString.split(";");
     for(let i = 0; i < dependencies.length; i++) {
-        let childId = findIdOfCourse(dependencies[i]);
+        let dependancyName = dependencies[i].split(":")[0];
+        let dependancyType = dependencies[i].split(":")[1];
+
+        let childId = findIdOfCourse(dependancyName);
         if(childId != -1) {
-            coursesArray[parentId].links[coursesArray[parentId].links.length] = childId;
+            let newLink = new Object();
+            newLink.id = childId;
+            newLink.type = dependancyType;
+            coursesArray[parentId].links[coursesArray[parentId].links.length] = newLink;
             coursesArray[childId].backLinks[coursesArray[childId].backLinks.length] = parentId;
         }
     }
@@ -134,7 +160,7 @@ function mark(markers, markedCourses, currentId, groupId) {
     markedCourses.add(currentId);
     markers[currentId] = groupId;
     for(let i = 0; i < coursesArray[currentId].links.length; i++) {
-        mark(markers, markedCourses, coursesArray[currentId].links[i], groupId);
+        mark(markers, markedCourses, coursesArray[currentId].links[i].id, groupId);
     }
     for(let i = 0; i < coursesArray[currentId].backLinks.length; i++) {
         mark(markers, markedCourses, coursesArray[currentId].backLinks[i], groupId);
@@ -171,8 +197,8 @@ function topologicalSortHelper(node, explored, s, group) {
    // Marks this node as visited and goes on to the nodes
    // that are dependent on this node, the edge is node ----> n
    coursesArray[node].links.forEach(childNode => {
-      if (!explored.has(childNode)) {
-         topologicalSortHelper(childNode, explored, s);
+      if (!explored.has(childNode.id)) {
+         topologicalSortHelper(childNode.id, explored, s);
       }
    });
    // All dependencies are resolved for this node, we can now add
@@ -191,7 +217,7 @@ function drawConnectedCourseTabs() {
     for(let i = 0; i < coursesArray.length; i++) {
         let bgColor = generateRandomColor();
         for(let j = 0; j < coursesArray[i].links.length; j++) {
-            let placeOfDependantCourse = findCoursePlaceFromId(coursesArray[i].links[j]);
+            let placeOfDependantCourse = findCoursePlaceFromId(coursesArray[i].links[j].id);
             let yPosBeg = yBeginning + (i - 1) * (tabHeight + offset * 5) + tabHeight * 1.5;
             let yPosEnd = yBeginning + (placeOfDependantCourse - 1) * (tabHeight + offset * 5) + tabHeight * 1.4;
             let xPos;
@@ -200,7 +226,11 @@ function drawConnectedCourseTabs() {
             } else {
                 xPos = xBeginning - offset + tabWidth;
             }
-            drawLink(xPos, yPosBeg, yPosEnd, leftLink, bgColor);
+            if(coursesArray[i].links[j].type == "S") {
+                drawLink(xPos, yPosBeg, yPosEnd, leftLink, bgColor, "strong");
+            }else{
+                drawLink(xPos, yPosBeg, yPosEnd, leftLink, bgColor);
+            }
             leftLink = !leftLink;
         }
         drawCourceTab(xBeginning, yBeginning + i * (tabHeight + offset * 5), coursesArray[i].name, tabWidth, bgColor);
@@ -219,6 +249,14 @@ function findTabWidth() {
 }
 
 function generateRandomColor(){
+    if(!randomizeColors) {
+        if(currentColor == 7) {
+            currentColor = 0;
+        } else {
+            currentColor++;
+        }
+        return colors[currentColor];
+    }
     let maxVal = 0x444444;
     let randomNumber = Math.random() * maxVal; 
     randomNumber = Math.floor(randomNumber) + 0xAAAAAB;
@@ -239,7 +277,7 @@ function findCoursePlaceFromId(id) {
 }
 
 /// Draw an arc in canvas connecting two courses
-function drawLink(xPos, yPosBeg, yPosEnd, isLeft, color) {
+function drawLink(xPos, yPosBeg, yPosEnd, isLeft, color, type) {
     if(yPosBeg > yPosEnd) {
         let s = yPosEnd;
         yPosEnd = yPosBeg;
@@ -263,6 +301,13 @@ function drawLink(xPos, yPosBeg, yPosEnd, isLeft, color) {
     }
 
     canvas.bezierCurveTo(xControl, yControl1, xControl, yControl2, xPos, yPosEnd);
+    if(type == "strong") {
+        canvas.setLineDash([]);
+    }else{
+        canvas.setLineDash([4, 2]);
+        canvas.lineDashOffset = 4;
+    }
+
     canvas.stroke()
 }
 
@@ -279,4 +324,31 @@ function drawCourceTab(xPos, yPos, name, width, bgColor) {
     canvas.fillStyle = defaultColor;
     canvas.font = defaultFont;
     canvas.fillText(name.toUpperCase() , xPos + offset, yPos - offset, width - offset);
+}
+
+var colors;
+var currentColor;
+function createColors() {
+    colors = new Array();
+    colors[0] = "#eea08e";
+    colors[1] = "rgb(238, 142, 188)";
+    colors[2] = "#dcee8e";
+    colors[3] = "#8edcee";
+    colors[4] = "rgb(142, 238, 192)";
+    colors[5] = "rgb(238, 192, 142)";
+    colors[6] = "#a08eee";
+    colors[7] = "rgb(192, 142, 238)"
+    currentColor = 7;
+}
+
+var randomizeColors = false;
+function changeColorMode() {
+    randomizeColors = (!randomizeColors);
+    if(randomizeColors) {
+        document.getElementById("color-change-btn").textContent = "Цветове на предметите: случайни цветове.";
+    } else {
+        document.getElementById("color-change-btn").textContent = "Цветове на предметите: последователни цветове.";
+    }
+    currentColor = 7;
+    start();
 }

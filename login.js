@@ -26,7 +26,7 @@
                         data: data,
                         status: response.status
                     })).then(res => {
-                        document.cookie = "currentlyLoggedInUserSpecialty=" + res.data.specialty;
+                        document.cookie = "currentlyLoggedInUserSpeciality=" + res.data.specialty;
                         window.location.href = './index.html';
                     }));
             })

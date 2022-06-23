@@ -87,16 +87,15 @@ body {
 
 .grid .gridBox {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     padding: 1% 2%;
     background: #fff;
-    height: 250px;
     box-sizing: border-box;
 }
 
 .disc-style-type {
     list-style-type: disc;
-    overflow: auto;
+    overflow-x: scroll;
     white-space: nowrap;
 }
 
@@ -217,7 +216,7 @@ select {
     overflow-y: hidden;
     overflow-x: auto;
     width: 100%;
-    height: 300px;
+    height: 320px;
     white-space: nowrap;
     background-color: #04AA6D;
 }
@@ -256,4 +255,15 @@ section#create-course-title {
 #course-form {
     display: block;
     visibility: hidden;
+}
+
+#color-change-btn {
+    padding: 10px;
+    background-color: #04AA6D;
+    font-size: large;
+    font-weight: bold;
+}
+
+#color-change-btn:hover {
+    cursor:pointer;
 }

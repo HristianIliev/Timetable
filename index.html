@@ -45,10 +45,32 @@
             <table>
                 <tr>
                     <td class="label">
-                        <label for="titleInput">Име</label>
+                        <label for="titleInput">Предмет</label>
                     </td>
                     <td class="inputBox">
                         <input type="text" id="titleInput" pattern="^[А-Яа-я 0-9]+$" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">
+                        <label for="">Преподавател</label>
+                    </td>
+                    <td class="inputBox">
+                        <input type="text" id="teacher" pattern="^[А-Яа-яA-Za-z 0-9]+$" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">
+                        <label for="">Локация</label>
+                    </td>
+                    <td class="inputBox">
+                        <input type="text" id="location" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <section id="startTimeHelp" class="help">Може да се въведе например име на зала на провеждане или линк.</section>
                     </td>
                 </tr>
                 <tr>
@@ -106,13 +128,17 @@
                         <label for="dependenciesInput">Предпоставки</label>
                     </td>
                     <td class="inputBox">
-                        <input type="text" id="dependenciesInput" aria-describedby="dependenciesHelp" pattern="^[А-Яа-я 0-9;]+$">
+                        <input type="text" id="dependenciesInput" aria-describedby="dependenciesHelp" pattern="^[А-Яа-я 0-9;:]+$">
                     </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>
-                        <section id="dependenciesHelp" class="help">Напиши курсовете, които са предпоставки за този курс във формат: Име на Курс 1;Име на Курс 2;Име на Курс3;... </section>
+                        <section id="dependenciesHelp" class="help">
+                            Напиши курсовете, които са предпоставки за този курс във формат: "&lt;име на Курс 1&gt;:&lt;сила на зависимост&gt;;&lt;име на Курс 2&gt;:&lt;сила на зависимост&gt;;..."
+                            <br>
+                            Силата може да е S - за силна зависимост и W - за слаба.
+                        </section>
                     </td>
                 </tr>
                 <tr>

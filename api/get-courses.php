@@ -4,12 +4,10 @@
 require_once("../db/db.php");
 
 try {
-    $specialty = $_GET["specialty"];
-
     $db = new DB();
     $connection = $db->getConnection();
 
-    $sql = "SELECT c.specialty, c.id, c.title, c.description, c.day, c.dependencies, c.start_time as startTime, c.end_time as endTime FROM courses c";
+    $sql = "SELECT c.specialty, c.id, c.title, c.description, c.day, c.dependencies, c.start_time as startTime, c.end_time as endTime, c.teacher, c.location FROM courses c";
 
     $stmt = $connection->prepare($sql);
     $stmt->execute();
@@ -20,11 +18,24 @@ try {
     }
 
     $result = [];
-    for($i = 0; $i < count($courses); $i++) {
-	    if ($courses[$i]["specialty"] == $specialty) {
-            array_push($result, $courses[$i]);
+    if(!empty($_GET["speciality"])) {
+        $specialty = $_GET["speciality"];
+        for($i = 0; $i < count($courses); $i++) {
+            if ($courses[$i]["specialty"] == $specialty) {
+                array_push($result, $courses[$i]);
+            }
         }
     }
+    else if(!empty($_GET["location"])){
+        $location = $_GET["location"];
+        for($i = 0; $i < count($courses); $i++) {
+            if ($courses[$i]["location"] == $location) {
+                array_push($result, $courses[$i]);
+            }
+        }
+    }
+    
+    
 
     echo json_encode($result);
 } catch (PDOException $e) {

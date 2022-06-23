@@ -3,7 +3,7 @@
 require_once('../db/db.php');
 
 function validate($course) {
-    if (!isset($course["title"]) && !isset($course["description"]) && !isset($course["day"]) && !isset($course["startTime"]) && !isset($course["endTime"])) {
+    if (!isset($course["title"]) && !isset($course["teacher"]) && !isset($course["location"]) && !isset($course["description"]) && !isset($course["day"]) && !isset($course["startTime"]) && !isset($course["specialty"])) {
         return ["isValid" => false, "message" => "Некоректни данни!"];
     }
 
@@ -28,8 +28,8 @@ if ($post) {
 
         unset($course["id"]);
 
-        $sql = "INSERT INTO courses (title, description, day, start_time, end_time, dependencies, specialty) 
-                VALUES (:title, :description, :day, :startTime, :endTime, :dependencies, :specialty)";
+        $sql = "INSERT INTO courses (title, teacher, location, description, day, start_time, end_time, dependencies, specialty) 
+                VALUES (:title, :teacher, :location, :description, :day, :startTime, :endTime, :dependencies, :specialty)";
 
         unset($course->id);
         

@@ -1,12 +1,12 @@
 function loadCourses() {
     document.getElementById('courses-body').innerHTML = null;
 
-    var cookie = getCookie("currentlyLoggedInUserSpecialty");
+    var cookie = getCookie("currentlyLoggedInUserSpeciality");
     if (!cookie || cookie === '') {
         cookie = "SI";
     }
 
-    return fetch('./api/get-courses.php?specialty=' + cookie)
+    return fetch('./api/get-courses.php?speciality=' + cookie)
         .then(res => res.json())
         .then(courses => {
             courses.forEach(course => {
@@ -57,12 +57,14 @@ function getFormValue(courseForm) {
     const formElements = Array.from(courseForm.querySelectorAll('textarea, input, select'));
     return {
         title: formElements[0].value,
-        description: formElements[1].value,
-        day: formElements[2].value,
-        startTime: formElements[3].value,
-        endTime: formElements[4].value,
-        dependencies: formElements[5].value,
-        specialty: formElements[6].value
+        teacher: formElements[1].value,
+        location: formElements[2].value,
+        description: formElements[3].value,
+        day: formElements[4].value,
+        startTime: formElements[5].value,
+        endTime: formElements[6].value,
+        dependencies: formElements[7].value,
+        specialty: formElements[8].value
     }
 }
 
@@ -130,6 +132,13 @@ function renderCourse(course) {
     const section = document.createElement('section');
     section.setAttribute('id', courseId);
     section.classList.add('course');
+    let locationLink;
+    if(isValidHttpUrl(course.location)) {
+        locationLink = `<a href="${course.location}">${course.location}</a>`;
+    }
+    else {
+        locationLink = `<a href="./display.html?location=${course.location}">${course.location}</a>`;
+    }
     section.innerHTML = `
     <ul class="grid">
         <li class="gridListItem">
@@ -138,7 +147,10 @@ function renderCourse(course) {
                 <ul class="disc-style-type">
                     <li>От ${course.startTime} ч. до ${course.endTime} ч.</li>
                     <li>Ден: ${course.day}</li>
+                    <li>Локация: ${locationLink}</li>
+                    <li>Преподавател: ${course.teacher}</li>
                     <li>Описание: ${course.description}</li>
+                    <li>Специалност: ${course.specialty}</li>
                     <li>Предпоставки: ${course.dependencies}</li>
                 </ul>
                 <button id="delete-btn-${courseId}" class="delete-btn">Изтрий</button>
@@ -151,6 +163,17 @@ function renderCourse(course) {
     courses.appendChild(section);
 
     addDeleteBtnListener(courseId);
+}
+
+function isValidHttpUrl(string) {
+
+    try {
+        let url = new URL(string);
+    } catch (_) {
+        return false;  
+    }
+
+    return true;
 }
 
 (function() {
